@@ -13,27 +13,6 @@ from Config import config
 from Get_Data import DataSet
 
 
-class Metrics(Callback):
-    def on_train_begin(self, logs={}):
-        self.val_accs = []
-        self.val_f1s = []
-        self.val_recalls = []
-        self.val_precisions = []
-
-    def on_epoch_end(self, epoch, logs={}):
-        val_predict = (np.asarray(self.model.predict(
-            self.validation_data[0]))).round()
-        val_targ = self.validation_data[1]
-        _val_acc = accuracy_score(val_targ, val_predict)
-        _val_f1 = f1_score(val_targ, val_predict, average='weighted')
-        _val_recall = recall_score(val_targ, val_predict, average='weighted')
-        _val_precision = precision_score(val_targ, val_predict, average='weighted')
-        self.val_accs.append(_val_acc)
-        self.val_f1s.append(_val_f1)
-        self.val_recalls.append(_val_recall)
-        self.val_precisions.append(_val_precision)
-        return
-
 #建立一个基于CNN的人脸识别模型
 class MY_Model(object):
     FILE_PATH = config['model_file_path']   #模型进行存储和读取的地方
@@ -41,7 +20,6 @@ class MY_Model(object):
 
     def __init__(self):
         self.model = None
-        self.my_metrics = Metrics()
 
     #读取实例化后的DataSet类作为进行训练的数据源
     def read_trainData(self,dataset):
@@ -120,21 +98,6 @@ class MY_Model(object):
         print('Model Saved.')
         self.model.save(file_path)
 
-    def load(self, file_path=FILE_PATH):
-        print('Model Loaded.')
-        self.model = load_model(file_path)
-
-    #需要确保输入的img得是灰化之后（channel =1 )且 大小为IMAGE_SIZE的人脸图片
-    def predict(self,img):
-        img = img.reshape((1, self.IMAGE_SIZE, self.IMAGE_SIZE, 3))
-        img = img.reshape((1, self.IMAGE_SIZE, self.IMAGE_SIZE, 3))
-        img = img.astype('float32')
-        img = img/255.0
-
-        result = self.model.predict_proba(img)  #测算一下该img属于某个label的概率
-        max_index = np.argmax(result) #找出概率最高的
-
-        return max_index,result[0][max_index] #第一个参数为概率最高的label的index,第二个参数为对应概率
 
 
 if __name__ == '__main__':
