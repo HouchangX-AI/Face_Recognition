@@ -72,7 +72,9 @@ def readPicSaveFace(sourcePath,objectPath,min_p,max_p,size,number,*suffix):
         return('no_img')
 
 def main(in_dir,out_dir,min_p,max_p,num,size):
-
+    '''
+    输入：原始文件夹路径、输出文件夹路径、单人最少图片数、单人最大图片数、图片尺寸、人数
+    '''
     data_dir = in_dir
     humans_list = os.listdir(data_dir)
     number = 0
