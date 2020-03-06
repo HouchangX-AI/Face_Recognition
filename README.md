@@ -1,14 +1,16 @@
 # Face_Recognition
 # 配置及环境
 ## 硬件环境
-使用了1台Linux服务器以及一台MacBook Pro，Linux服务器带有4个RTX2080ti GPU。
-注：本项目硬件环境需求很低，单用MacBook Pro也可完成。
+使用了1台Linux服务器以及一台MacBook Pro，Linux服务器带有4个RTX2080ti GPU。  
+注：本项目硬件环境需求很低，单用MacBook Pro也可完成。  
 ## 依赖项
-TensorFlow-gpu==1.13.1
-Keras==2.2.4
-OpenCV-python==4.2.0.32
-Dlib==1.19.0
+TensorFlow-gpu==1.13.1  
+Keras==2.2.4  
+OpenCV-python==4.2.0.32  
+Dlib==1.19.0  
 # 代码运行
+部分数据集以及50人版，100人版训练权重文件比较大，没法传上来，放在了：
+链接:https://pan.baidu.com/s/1SlGfZojiYevH3zGZjeWGmQ  密码:u5fs
 ## 文件结构
 根目录如图所示：
  
